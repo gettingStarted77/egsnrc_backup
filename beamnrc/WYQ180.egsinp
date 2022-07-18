@@ -1,0 +1,190 @@
+Comet MXR-ICRU60                                                                 #!GUI1.0
+VACUUM
+0, 0, 0, 0, 0, 3, 0,  IWATCH ETC.
+4000000000.0, 33, 333, 9999, 1, 250000, 2, 0,  NCASE ETC.
+-1, 13, 0.08, 0.08, -1, 0,  0.0, 0.0, 0.0, 0.0,  IQIN, ISOURCE + OPTIONS
+0, MONOENERGETIC
+0.180
+0, 0, 0.512, 0.001, 0, 2, 0.512,  0 , ECUT,PCUT,IREJCT,ESAVE
+0, 1, 1, 4, 4,  PHOTON FORCING
+1, 2,  SCORING INPUT
+5, 0
+0.75, 2.0, 3, 4, 5, 
+0,  DOSE COMPONENTS
+-0.5, Z TO FRONT FACE
+*********** start of CM XTUBE with identifier MXR600  ***********
+5.0, RMAX
+Comet MXR-601HP/11 target
+-0.5, 1, ZMIN, ZTHICK
+20, ANGLE
+1, # LAYERS
+0.15, 0
+0.512, 0.01, 0, 2, 
+W521ICRU
+0.512, 0.01, 0, 0, 
+VACUUM
+2000.521, 0.01, 0, 1, 
+Cu
+*********** start of CM FLATFILT with identifier Aperture ***********
+13, RMAX
+ Aperture
+3.0, ZMIN
+15, NUMBER OF LAYERS
+1, 0.01, # CONES, ZTHICK OF LAYER 1
+2.0, 
+2.0, 
+1, 4.5, # CONES, ZTHICK OF LAYER 2
+1.1, 
+1.1, 
+1, 0.3, # CONES, ZTHICK OF LAYER 3
+2.5, 
+2.5, 
+1, 1.0, # CONES, ZTHICK OF LAYER 4
+1.5, 
+1.5, 
+1, 2.2, # CONES, ZTHICK OF LAYER 5
+1.5, 
+3.0, 
+1, 3.5, # CONES, ZTHICK OF LAYER 6
+1.5, 
+2.5, 
+1, 1.7, # CONES, ZTHICK OF LAYER 7
+1.1, 
+1.1, 
+1, 17, # CONES, ZTHICK OF LAYER 8
+5, 
+5, 
+1, 0.1, # CONES, ZTHICK OF LAYER 9
+5.4, 
+5.4, 
+1, 0.0478, # CONES, ZTHICK OF LAYER 10
+5.4, 
+5.4, 
+1, 0.2229, # CONES, ZTHICK OF LAYER 11
+5.4, 
+5.4, 
+1, 1.4, # CONES, ZTHICK OF LAYER 12
+4.4, 
+4.4, 
+1, 9.7, # CONES, ZTHICK OF LAYER 13
+5, 
+5, 
+2, 1.5, # CONES, ZTHICK OF LAYER 14
+3.2, 9.65, 
+3.2, 9.65, 
+1, 53, # CONES, ZTHICK OF LAYER 15
+5, 
+5, 
+0.512, 0.01, 0, 3, 
+VACUUM
+0.512, 0.01, 0, 23, 
+VACUUM
+0.512, 0.01, 0, 0, 
+VACUUM
+0.512, 0.01, 0, 0, 
+VACUUM
+0.512, 0.01, 0, 3, 
+Be
+0.512, 0.01, 0, 0, 
+VACUUM
+0.512, 0.01, 0, 23, 
+Air
+2000.512, 0.01, 0, 4, 
+Lead
+0.512, 0.01, 0, 23, 
+Air
+2000.512, 0.01, 0, 5, 
+Lead
+0.512, 0.01, 0, 23, 
+Air
+2000.512, 0.01, 0, 4, 
+Lead
+0.512, 0.01, 0, 23, 
+Air
+2000.512, 0.01, 0, 4, 
+Lead
+0.512, 0.01, 0, 23, 
+Air
+0.512, 0.01, 0, 23, 
+Air
+0.512, 0.01, 0, 6, 
+Air
+0.512, 0.01, 0, 23, 
+Air
+0.512, 0.01, 0, 7, 
+Cu
+0.512, 0.01, 0, 23, 
+Air
+0.512, 0.01, 0, 8, 
+AL
+0.512, 0.01, 0, 23, 
+Air
+0.512, 0.01, 0, 23, 
+Air
+0.512, 0.01, 0, 4, 
+Lead
+0.512, 0.01, 0, 23, 
+Air
+0.512, 0.01, 0, 23, 
+Air
+0.512, 0.01, 0, 23, 
+Air
+0.512, 0.01, 0, 4, 
+Lead
+0.512, 0.01, 0, 0, 
+Air
+0.512, 0.01, 0, 23, 
+Air
+0.512, 0.01, 0, 23, 
+Air
+*********************end of all CMs*****************************
+ #########################
+ :Start MC Transport Parameter:
+ 
+ Global ECUT= 0.512
+ Global PCUT= 0.001
+ Global SMAX= 1e10
+ ESTEPE= 0.25
+ XIMAX= 0.5
+ Boundary crossing algorithm= EXACT
+ Skin depth for BCA= 0
+ Electron-step algorithm= PRESTA-II
+ Spin effects= On
+ Brems angular sampling= Simple
+ Brems cross sections= NIST
+ Bound Compton scattering= On
+ Compton cross sections= default
+ Pair angular sampling= Simple
+ Pair cross sections= BH
+ Photoelectron angular sampling= On
+ Rayleigh scattering= On
+ Atomic relaxations= On
+ Electron impact ionization= On
+ Photon cross sections= xcom
+ Photon cross-sections output= Off
+ 
+ :Stop MC Transport Parameter:
+ #########################
+ :Start DBS rejection plane:
+ 
+ Use a rejection plane= Off
+ Z(cm) from zero reference plane= 1
+ 
+ :Stop DBS rejection plane:
+ #########################
+ :Start BCSE:
+ 
+ Use BCSE= On
+ Media to enhance=  WICRU512
+ Enhancement constant= 50
+ Enhancement power= 0
+ Russian Roulette= on
+ 
+ :Stop BCSE:
+ #########################
+ :Start user inputs:
+
+  # phsp output directory = /home/mainegra/egsnrc_mp/phsp/
+
+ :Stop user inputs:
+ #########################
