@@ -186,14 +186,14 @@
    UP= 50
 
    :start AIR:
-      elements = H, O
-      number of atoms = 2, 1
-      rho = 0.9982
+      density correction file= air_dry_nearsealevel 
       bremsstrahlung correction= NRC
    :stop AIR:
 
    :start WATER:
-      density correction file= water_liquid 
+      elements = H, O
+      number of atoms = 2, 1
+      rho = 0.9982
       bremsstrahlung correction= NRC
    :stop WATER:
 
