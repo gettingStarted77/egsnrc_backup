@@ -1,0 +1,238 @@
+##################################
+#
+# simulation Kair at reference point
+#
+##################################
+
+
+
+##################################
+# geometry definition
+##################################
+
+:start geometry definition:
+
+    ##################################
+##### reference_point in world filled air (8 m x 8 m x 8 m) 
+    ##################################
+    :start geometry:
+        library  = egs_box
+        box size = 800
+        name     = world
+        :start media input:
+            media = AIR
+        :stop media input:
+    :stop geometry:
+
+
+    ##################################
+    # Kair at the reference distance
+    ##################################
+    :start geometry:
+        library  = egs_spheres
+        name     = reference_point
+        midpoint = 0 0 2
+        radii    = 0.01
+        :start media input:
+            media = AIR
+        :stop media input:
+    :stop geometry:
+
+
+    ##################################
+    # reference_point in world
+    ##################################
+    :start geometry:
+        library       = egs_genvelope
+        base geometry = world
+        name          = reference_point_in_world
+        inscribed geometries = reference_point
+    :stop geometry:
+
+    simulation geometry = reference_point_in_world
+
+:stop geometry definition:
+
+
+##################################
+# Source definition 
+##################################
+:start source definition:
+    :start source:
+        library          = egs_phsp_source
+        phase space file = WYQ180.egsphsp1 
+        name             = WYQ180
+        particle type    = photons
+    :stop source:
+    
+    simulation source = WYQ180
+
+:stop source definition:
+
+
+##################################
+# media definition 
+##################################
+:start media definition:
+
+   AE= 0.512
+   UE= 50.511
+   AP= 0.001
+   UP= 50
+
+   :start AIR:
+      density correction file= air_dry_nearsealevel 
+      bremsstrahlung correction= NRC
+   :stop AIR:
+
+   :start WATER:
+      density correction file= water_liquid 
+      bremsstrahlung correction= NRC
+   :stop WATER:
+
+   :start Cu:
+      density correction file= copper 
+      bremsstrahlung correction= NRC
+   :stop Cu:
+
+   :start PMMA:
+      density correction file= polymethylmethacrylate__lucite___perspex___plexiglas_ 
+      bremsstrahlung correction= NRC
+   :stop PMMA:
+
+
+   #################
+   # Al EN AW-2011
+   #################
+   :start Al2011:
+      elements = Si, Fe, Cu, Zn, Pb, Al
+      mass fractions = 0.4, 0.7, 5.5, 0.3, 0.3, 92.8
+      rho = 2.82
+      bremsstrahlung correction = NRC
+   :stop Al2011:
+
+   #################
+   # Al EN AW-1098
+   #################
+   :start Al1098:
+      elements = Si, Fe, Cu, Zn, Ti, Al
+      mass fractions = 0.01, 0.006, 0.003, 0.015, 0.003, 99.963
+      rho = 2.7
+      bremsstrahlung correction = NRC
+   :stop Al1098:
+
+   :start GRAPHITE:
+      elements = C
+      number of atoms = 1
+      rho = 1.85
+      bremsstrahlung correction = NRC
+   :stop GRAPHITE:
+
+   :start PEEK:
+      elements = C, H, O
+      number of atoms = 19, 14, 3
+      rho = 1.32
+      bremsstrahlung correction = NRC
+   :stop PEEK:
+
+:stop media definition:
+
+
+##################################
+# Scoring options 
+##################################
+:start scoring options:
+
+    ### Scoring geometry
+    :start calculation geometry:
+        geometry name         = reference_point_in_world
+        scoring regions       = 1  # outer air shell
+        scoring region masses = 5.04661E-9 # mass in g for each region
+    :stop calculation geometry:
+
+    ### fluence scoring requested (common to all calculation geometries)
+    :start fluence scoring:
+        minimum energy = 0.00
+        maximum energy = 0.181
+        number of bins = 200
+        scale          = linear
+    :stop fluence scoring:
+
+    ### E*muen file (could also be E*mutr): absolute or relative file path
+    emuen file = emuen_rho_air_1keV-1.5MeV.data 
+
+:stop scoring options:
+
+##################################
+# ausgab object definition 
+##################################
+:start ausgab object definition: # Output options
+    :start ausgab object: # Track scoring (view in egs_view)
+        name    = my_tracks
+        library = egs_track_scoring
+        stop scoring = 1024
+    :stop ausgab object:
+
+    :start ausgab object:
+        library = egs_dose_scoring
+        name = my_dose
+        medium dose = no
+        region dose = yes
+        dose regions = 1
+        volume = 4.18879E-6
+    :stop ausgab object:
+   
+:stop ausgab object definition:
+
+
+##################################
+# Modify here parameters that should be different from their defaults. 
+##################################
+:start MC transport parameter:
+    Global ECUT                    = 0.521          # Global electron transport cutoff
+    Global PCUT                    = 0.001          # Global photon transport cutoff
+    Global SMAX                    = 1e10           # Global maximum step-size restriction for e- transport
+    ESTEPE                         = 0.25           # Default is 0.25
+    XIMAX                          = 0.5            # Default is 0.5, max. value is 1.
+    Boundary crossing algorithm    = exact          # exact (default), PRESTA-I
+    Skin depth for BCA             = 3              # Default value is 3 for exact boundary crossing
+    Electron-step algorithm        = PRESTA-II      # PRESTA-II (default),PRESTA-I
+    Spin effects                   = On             # On (default),Off
+    Brems angular sampling         = KM             # Simple,KM (default)
+    Brems cross sections           = BH             # BH (default),NIST
+    Pair angular sampling          = Simple         # Off, Simple (default),KM
+    Triplet production             = Off            # On or Off (default)
+    Electron Impact Ionization     = On             # On, Off (default), casnati, kolbenstvedt, gryzinski
+    Bound Compton scattering       = On             # On, Off, Simple, norej (default)
+    Radiative Compton corrections  = Off             # On,  Off (default)
+    Rayleigh scattering            = On             # On ,Off (default), custom
+    Photoelectron angular sampling = On             # On (default),Off
+    Atomic relaxations             = On             # On (default),Off
+    Photon cross sections          = mcdf-xcom      # si, epdl, xcom (default) , mcdf-xcom or user-supplied
+    Photon cross-sections output   = Off            # Off (default) or On
+    Compton cross sections         = comp_xsections # user-supplied
+    Photonuclear attenuation       = Off            # Off (default) or On
+    Photonuclear cross sections    = default        # default (default) or user-supplied
+:stop MC transport parameter:
+
+
+##################################
+# rng definition 
+##################################
+:start rng definition:
+    type = ranmar
+    initial seeds = 1802 1000
+:stop rng definition:
+
+
+##################################
+# run control 
+##################################
+:start run control:
+    ncase                       = 1E11
+    #nbatch                      = [optional] number of batches to use (default is 10)
+    #statistical accuracy sought = [optional] required uncertainty in %
+    #max cpu hours allowed       = [optional] max. CPU time allowed
+    #calculation                 = [optional] first or restart or combine or analyze
+    #geometry error limit        = [optional] number of geometry errors allowed before crashing
+:stop run control:

@@ -1,0 +1,633 @@
+##################################
+#
+# simulate Dw and Dcav,w with chamber in water phantom,
+# and Dcav,air with chamber in air.
+#
+##################################
+
+
+
+##################################
+# geometry definition
+##################################
+
+:start geometry definition:
+
+    ##################################
+    #
+    #  world filled air (8 m x 8 m x 8 m) 
+    #
+    ##################################
+    :start geometry:
+        library  = egs_box
+        box size = 800
+        name     = world
+        :start media input:
+            media = AIR
+        :stop media input:
+    :stop geometry:
+
+
+    ##################################
+    #
+    # Farmer Chamber 30013
+    #
+    ##################################
+
+    ####################
+    # The chamber at (0, 0, 2) of egs coordinate
+    # to simulate Dcav,air in AIR
+    ####################
+    :start geometry:
+        library = egs_cones
+        type = EGS_ConeStack
+        name = chamber_in_air
+        axis = 0 1.3 2 0 -1 0
+        
+        ####################
+        # tip
+        ####################
+        # lay 1
+        :start layer:
+            thickness = 0.03936
+            top radii = 0. 1
+            bottom radii = 0.0667 1
+            media = PMMA AIR
+        :stop layer:
+        # lay 2
+        :start layer:
+            thickness = 0.01058
+            top radii = 0. 0.0667 1 
+            bottom radii = 0.01792 0.08462 1
+            media = GRAPHITE PMMA AIR
+        :stop layer:
+        # lay 3
+        :start layer:
+            thickness = 0.15514
+            top radii = 0. 0.01792 0.08462 1
+            bottom radii = 0.26288 0.2808 0.3475 1 
+            media = AIR GRAPHITE PMMA AIR
+        :stop layer:
+        # lay 4
+        :start layer:
+            thickness = 0.01959
+            top radii = 0.26288 0.2808 0.3475 1 
+            bottom radii = 0.29608 0.314 0.3475 1
+            media = AIR GRAPHITE PMMA AIR
+        :stop layer:
+        # lay 5
+        :start layer:
+            thickness = 0.00526
+            top radii = 0.29608 0.314 0.3475 1 
+            bottom radii = 0.305 0.314 0.3475 1
+            media = AIR GRAPHITE PMMA AIR
+        :stop layer:
+
+
+        ####################
+        # electrode 
+        ####################
+        # lay 6
+        :start layer:
+            thickness = 2.07
+            top radii = 0.055 0.305 0.314 0.3475 1
+            bottom radii = 0.055 0.305 0.314 0.3475 1
+            media = Al1098 AIR GRAPHITE PMMA AIR
+        :stop layer:
+
+        
+        ####################
+        # bottom 
+        ####################
+        # lay 7
+        :start layer:
+            thickness = 0.050
+            top radii = 0.055 0.075 0.28 0.305 0.314 0.3475 1
+            bottom radii = 0.055 0.075 0.28 0.305 0.314 0.3475 1
+            media = Al1098 AIR GRAPHITE AIR GRAPHITE PMMA AIR
+        :stop layer:
+        # lay 8
+        :start layer:
+            thickness = 0.040
+            top radii = 0.055 0.075 0.175 0.21 0.305 0.314 0.3475 1
+            bottom radii = 0.055 0.075 0.175 0.21 0.305 0.314 0.3475 1
+            media = Al1098 AIR Al2011 GRAPHITE AIR GRAPHITE PMMA AIR
+        :stop layer:
+        # lay 9
+        :start layer:
+            thickness = 0.11
+            top radii = 0.055 0.115 0.175 0.21 0.245 0.305 0.314 0.3475 1
+            bottom radii = 0.055 0.115 0.175 0.21 0.245 0.305 0.314 0.3475 1 
+            media = Al1098 PEEK Al2011 GRAPHITE AIR Al2011 GRAPHITE PMMA AIR
+        :stop layer:
+        # lay 10
+        :start layer:
+            thickness = 0.11
+            top radii = 0.08 0.115 0.175 0.21 0.245 0.305 0.314 0.3475 0.3975 1
+            bottom radii = 0.08 0.115 0.175 0.21 0.245 0.305 0.314 0.3475 0.3975 1
+            media = Al1098 PEEK Al2011 GRAPHITE AIR Al2011 GRAPHITE PMMA Al2011 AIR
+        :stop layer:
+        
+        set label = chamber_in_air_cavity_label 20 30 40 51
+
+    :stop geometry:
+
+     
+    ####################
+    # The chamber at (0, 0, 0) of egs coordinate
+    # to simulate Dw and Dcav,w in AIR
+    ####################
+    :start geometry:
+        library = egs_cones
+        type = EGS_ConeStack
+        name = chamber_in_water
+        axis = 0 -1.3 0 0 1 0
+        
+        ####################
+        # tip
+        ####################
+        # lay 1
+        :start layer:
+            thickness = 0.03936
+            top radii = 0. 1
+            bottom radii = 0.0667 1
+            media = PMMA WATER
+        :stop layer:
+        # lay 2
+        :start layer:
+            thickness = 0.01058
+            top radii = 0. 0.0667 1 
+            bottom radii = 0.01792 0.08462 1
+            media = GRAPHITE PMMA WATER
+        :stop layer:
+        # lay 3
+        :start layer:
+            thickness = 0.15514
+            top radii = 0. 0.01792 0.08462 1
+            bottom radii = 0.26288 0.2808 0.3475 1 
+            media = AIR GRAPHITE PMMA WATER
+        :stop layer:
+        # lay 4
+        :start layer:
+            thickness = 0.01959
+            top radii = 0.26288 0.2808 0.3475 1 
+            bottom radii = 0.29608 0.314 0.3475 1
+            media = AIR GRAPHITE PMMA WATER
+        :stop layer:
+        # lay 5
+        :start layer:
+            thickness = 0.00526
+            top radii = 0.29608 0.314 0.3475 1 
+            bottom radii = 0.305 0.314 0.3475 1
+            media = AIR GRAPHITE PMMA WATER
+        :stop layer:
+
+
+        ####################
+        # electrode 
+        ####################
+        # lay 6
+        :start layer:
+            thickness = 2.07
+            top radii = 0.055 0.305 0.314 0.3475 1
+            bottom radii = 0.055 0.305 0.314 0.3475 1
+            media = Al1098 AIR GRAPHITE PMMA WATER
+        :stop layer:
+
+        
+        ####################
+        # bottom 
+        ####################
+        # lay 7
+        :start layer:
+            thickness = 0.050
+            top radii = 0.055 0.075 0.28 0.305 0.314 0.3475 1
+            bottom radii = 0.055 0.075 0.28 0.305 0.314 0.3475 1
+            media = Al1098 AIR GRAPHITE AIR GRAPHITE PMMA WATER
+        :stop layer:
+        # lay 8
+        :start layer:
+            thickness = 0.040
+            top radii = 0.055 0.075 0.175 0.21 0.305 0.314 0.3475 1
+            bottom radii = 0.055 0.075 0.175 0.21 0.305 0.314 0.3475 1
+            media = Al1098 AIR Al2011 GRAPHITE AIR GRAPHITE PMMA WATER
+        :stop layer:
+        # lay 9
+        :start layer:
+            thickness = 0.11
+            top radii = 0.055 0.115 0.175 0.21 0.245 0.305 0.314 0.3475 1
+            bottom radii = 0.055 0.115 0.175 0.21 0.245 0.305 0.314 0.3475 1 
+            media = Al1098 PEEK Al2011 GRAPHITE AIR Al2011 GRAPHITE PMMA WATER
+        :stop layer:
+        # lay 10
+        :start layer:
+            thickness = 0.11
+            top radii = 0.08 0.115 0.175 0.21 0.245 0.305 0.314 0.3475 0.3975 1
+            bottom radii = 0.08 0.115 0.175 0.21 0.245 0.305 0.314 0.3475 0.3975 1
+            media = Al1098 PEEK Al2011 GRAPHITE AIR Al2011 GRAPHITE PMMA Al2011 WATER
+        :stop layer:
+        
+        set label = chamber_in_water_cavity_label 20 30 40 51
+
+    :stop geometry:
+
+
+    #################################
+    #
+    # The water phantom consist of 
+    # water_box_with_chamber, window and PMMA.
+    #
+    #################################
+
+    ####################
+    # phantom_box at (0, 0, 0) of egs coordinate
+    ####################
+    :start geometry:
+        library  = egs_box
+        box size = 30 
+        name     = phantom_box 
+        :start media input:
+            media = PMMA
+        :stop media input:
+    :stop geometry:
+    
+    ####################
+    # water_box_with_chamber
+    ####################
+
+    ####################
+    # water_box_ at (0, 1.882, 0) relative to phantom_box
+    ####################
+    :start geometry:
+        library  = egs_box
+        box size = 26.236 28.118 26.236
+        name     = water_box 
+        :start media input:
+            media = WATER
+        :stop media input:
+    :stop geometry:
+    
+    :start geometry:
+        library     = egs_gtransformed
+        my geometry = water_box
+        name        = water_box_
+        :start transformation:
+            translation = 0 1.882 0
+        :stop transformation:
+    :stop geometry:
+    
+    ####################
+    # chamber at (0, 0, -12.04665157) relative to phantom_box
+    ####################
+    :start geometry:
+        library     = egs_gtransformed
+        my geometry = chamber_in_water
+        name        = chamber_
+        :start transformation:
+            translation = 0 0 -12.04665157
+        :stop transformation:
+    :stop geometry:
+
+    #####################
+    # put chamber in water_box_
+    #####################
+    :start geometry:
+        library       = egs_genvelope
+        name          = water_box_with_chamber 
+        base geometry = water_box_
+        inscribed geometries = chamber_
+    :stop geometry:
+
+
+    ####################
+    # window_box_ at (0, 0, -14.5) relative to phantom_box
+    ####################
+    :start geometry:
+        library  = egs_box
+        box size = 10 10 1.1 
+        name     = window_box 
+        :start media input:
+            media = AIR
+        :stop media input:
+    :stop geometry:
+    
+    :start geometry:
+        library     = egs_gtransformed
+        my geometry = window_box
+        name        = window_box_
+        :start transformation:
+            translation = 0 0 -14.5
+        :stop transformation:
+    :stop geometry:
+
+    ####################
+    # put window_box_ and water_box_with_chamber in phantom_box
+    ####################
+    :start geometry:
+        library  = egs_genvelope
+        name = water_phantom_with_chamber 
+        base geometry = phantom_box
+        inscribed geometries = window_box_  water_box_with_chamber
+    :stop geometry:
+
+
+    #################################
+    #  
+    # world with water_phantom_with_chamber 
+    #
+    #################################
+
+    ####################
+    # water_phantom_with_chamber_ at (0, 0, 16) of egs coordinate 
+    ####################
+    :start geometry:
+        library     = egs_gtransformed
+        my geometry = water_phantom_with_chamber
+        name        = water_phantom_with_chamber_
+        :start transformation:
+            translation = 0 0 16
+        :stop transformation:
+    :stop geometry:
+
+    ####################
+    # put water_phantom_with_chamber_ in world
+    ####################
+    :start geometry:
+        library  = egs_genvelope
+        name = water_phantom_with_chamber_in_world 
+        base geometry = world
+        inscribed geometries = water_phantom_with_chamber_ 
+    :stop geometry:
+
+
+    #################################
+    #  
+    # world with chamber 
+    #
+    #################################
+
+    ####################
+    # put chamber in world filled air
+    ####################
+    :start geometry:
+        library       = egs_genvelope
+        name          = chamber_in_world 
+        base geometry = world
+        inscribed geometries = chamber_in_air
+    :stop geometry:
+
+
+    #################################
+    #  
+    # world with reference_point
+    #
+    #################################
+
+    ####################
+    # the reference point at (0, 0, -12.04665257) relative to phantom_box
+    ####################
+    :start geometry:
+        library  = egs_spheres
+        name     = reference_point
+        midpoint = 0 0 -12.04665257
+        radii    = 0.01
+        :start media input:
+            media = WATER
+        :stop media input:
+        
+        set label = reference_point_cavity_label 0
+    :stop geometry:
+
+    #####################
+    # put the reference point in water_box_
+    #####################
+    :start geometry:
+        library       = egs_genvelope
+        name          = water_box_with_reference_point 
+        base geometry = water_box_
+        inscribed geometries = reference_point
+    :stop geometry:
+
+    ####################
+    # put window_box_ and water_box_with_reference_point in phantom_box
+    ####################
+    :start geometry:
+        library  = egs_genvelope
+        name = water_phantom_with_reference_point 
+        base geometry = phantom_box
+        inscribed geometries = window_box_  water_box_with_reference_point
+    :stop geometry:
+
+    ####################
+    # water_phantom_with_chamber_ at (0, 0, 16) of egs coordinate 
+    ####################
+    :start geometry:
+        library     = egs_gtransformed
+        my geometry = water_phantom_with_reference_point
+        name        = water_phantom_with_reference_point_
+        :start transformation:
+            translation = 0 0 16
+        :stop transformation:
+    :stop geometry:
+
+    ####################
+    # put water_phantom_with_chamber_ in world
+    ####################
+    :start geometry:
+        library  = egs_genvelope
+        name = water_phantom_with_reference_point_in_world 
+        base geometry = world
+        inscribed geometries = water_phantom_with_reference_point_ 
+    :stop geometry:
+
+
+    simulation geometry = water_phantom_with_chamber_in_world
+
+:stop geometry definition:
+
+
+##################################
+# Source definition 
+##################################
+:start source definition:
+    :start source:
+        library          = egs_phsp_source
+        phase space file = WYQ180.egsphsp1 
+        name             = WYQ180
+        particle type    = photons
+    :stop source:
+    
+    simulation source = WYQ180
+
+:stop source definition:
+
+
+##################################
+# media definition 
+##################################
+:start media definition:
+
+   AE= 0.512
+   UE= 50.511
+   AP= 0.001
+   UP= 50
+
+   :start AIR:
+      density correction file= air_dry_nearsealevel 
+      bremsstrahlung correction= NRC
+   :stop AIR:
+
+   :start WATER:
+      density correction file= water_liquid 
+      bremsstrahlung correction= NRC
+   :stop WATER:
+
+   :start Cu:
+      density correction file= copper 
+      bremsstrahlung correction= NRC
+   :stop Cu:
+
+   :start PMMA:
+      density correction file= polymethylmethacrylate__lucite___perspex___plexiglas_ 
+      bremsstrahlung correction= NRC
+   :stop PMMA:
+
+
+   #################
+   # Al EN AW-2011
+   #################
+   :start Al2011:
+      elements = Si, Fe, Cu, Zn, Pb, Al
+      mass fractions = 0.4, 0.7, 5.5, 0.3, 0.3, 92.8
+      rho = 2.82
+      bremsstrahlung correction = NRC
+   :stop Al2011:
+
+   #################
+   # Al EN AW-1098
+   #################
+   :start Al1098:
+      elements = Si, Fe, Cu, Zn, Ti, Al
+      mass fractions = 0.01, 0.006, 0.003, 0.015, 0.003, 99.963
+      rho = 2.7
+      bremsstrahlung correction = NRC
+   :stop Al1098:
+
+   :start GRAPHITE:
+      elements = C
+      number of atoms = 1
+      rho = 1.85
+      bremsstrahlung correction = NRC
+   :stop GRAPHITE:
+
+   :start PEEK:
+      elements = C, H, O
+      number of atoms = 19, 14, 3
+      rho = 1.32
+      bremsstrahlung correction = NRC
+   :stop PEEK:
+
+:stop media definition:
+
+
+##################################
+# Scoring options 
+##################################
+:start scoring options:
+
+    ### Scoring geometry
+    :start calculation geometry:
+        geometry name         = water_phantom_with_chamber_in_world
+        cavity regions        = chamber_in_water_cavity_label  # outer air shell
+        cavity mass           = 7.26264E-4 # mass in g for each region
+    :stop calculation geometry:
+
+    :start calculation geometry:
+        geometry name         = chamber_in_world
+        cavity regions        = chamber_in_air_cavity_label  # outer air shell
+        cavity mass           = 7.26264E-4 # mass in g for each region
+    :stop calculation geometry:
+
+    :start calculation geometry:
+        geometry name         = water_phantom_with_reference_point_in_world 
+        cavity regions        = reference_point_cavity_label  # outer air shell
+        cavity mass           = 4.18879E-6 # mass in g for each region
+    :stop calculation geometry:
+
+    ### fluence scoring requested (common to all calculation geometries)
+    :start fluence scoring:
+        minimum energy = 0.00
+        maximum energy = 0.181
+        number of bins = 200
+        scale          = linear
+    :stop fluence scoring:
+
+    ### E*muen file (could also be E*mutr): absolute or relative file path
+    emuen file = emuen_rho_air_1keV-1.5MeV.data 
+
+:stop scoring options:
+
+##################################
+# ausgab object definition 
+##################################
+:start ausgab object definition: # Output options
+    :start ausgab object: # Track scoring (view in egs_view)
+        name    = my_tracks
+        library = egs_track_scoring
+        stop scoring = 1024
+    :stop ausgab object:
+
+:stop ausgab object definition:
+
+
+##################################
+# Modify here parameters that should be different from their defaults. 
+##################################
+:start MC transport parameter:
+    Global ECUT                    = 0.521          # Global electron transport cutoff
+    Global PCUT                    = 0.001          # Global photon transport cutoff
+    Global SMAX                    = 1e10           # Global maximum step-size restriction for e- transport
+    ESTEPE                         = 0.25           # Default is 0.25
+    XIMAX                          = 0.5            # Default is 0.5, max. value is 1.
+    Boundary crossing algorithm    = exact          # exact (default), PRESTA-I
+    Skin depth for BCA             = 3              # Default value is 3 for exact boundary crossing
+    Electron-step algorithm        = PRESTA-II      # PRESTA-II (default),PRESTA-I
+    Spin effects                   = On             # On (default),Off
+    Brems angular sampling         = KM             # Simple,KM (default)
+    Brems cross sections           = BH             # BH (default),NIST
+    Pair angular sampling          = Simple         # Off, Simple (default),KM
+    Triplet production             = Off            # On or Off (default)
+    Electron Impact Ionization     = On             # On, Off (default), casnati, kolbenstvedt, gryzinski
+    Bound Compton scattering       = On             # On, Off, Simple, norej (default)
+    Radiative Compton corrections  = Off             # On,  Off (default)
+    Rayleigh scattering            = On             # On ,Off (default), custom
+    Photoelectron angular sampling = On             # On (default),Off
+    Atomic relaxations             = On             # On (default),Off
+    Photon cross sections          = mcdf-xcom      # si, epdl, xcom (default) , mcdf-xcom or user-supplied
+    Photon cross-sections output   = Off            # Off (default) or On
+    Compton cross sections         = comp_xsections # user-supplied
+    Photonuclear attenuation       = Off            # Off (default) or On
+    Photonuclear cross sections    = default        # default (default) or user-supplied
+:stop MC transport parameter:
+
+
+##################################
+# rng definition 
+##################################
+:start rng definition:
+    type = ranmar
+    initial seeds = 1802 1000
+:stop rng definition:
+
+
+##################################
+# run control 
+##################################
+:start run control:
+    ncase                       = 1E12
+    #nbatch                      = [optional] number of batches to use (default is 10)
+    #statistical accuracy sought = [optional] required uncertainty in %
+    #max cpu hours allowed       = [optional] max. CPU time allowed
+    #calculation                 = [optional] first or restart or combine or analyze
+    #geometry error limit        = [optional] number of geometry errors allowed before crashing
+:stop run control:
