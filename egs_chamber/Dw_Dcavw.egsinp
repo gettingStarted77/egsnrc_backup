@@ -684,9 +684,9 @@
         # with corresponding XCSE factors is useful when one wants to use
         # different XCSE factors in the different regions.
         enhance regions = 4 5 6 15 16 17 25 26 27 28 35 36 37 38 45 46 47 48 \
-                          55 56 57 58 59 65 66 67 68 69 71
-        enhancement = 512 512 512 512 512 512 512 512 512 512 512 512 512 512 512 512 512 512 512 \
-                      512 512 512 512 512 512 512 512 512 512 512  
+                          55 56 57 58 59 65 66 67 68 69 70 71
+        enhancement = 512 512 512 512 512 512 512 512 512 512 512 512 512 512 512 512 512 512 \
+                      512 512 512 512 512 512 512 512 512 512 512 512  
 
     :stop calculation geometry:
 
@@ -775,7 +775,7 @@
 # run control 
 ##################################
 :start run control:
-    ncase                       = 1E11
+    ncase                       = 1E8
     #nbatch                      = [optional] number of batches to use (default is 10)
     #statistical accuracy sought = [optional] required uncertainty in %
     #max cpu hours allowed       = [optional] max. CPU time allowed
