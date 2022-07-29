@@ -1,22 +1,18 @@
 Comet MXR-320                                                                    #!GUI1.0
 VACUUM
 0, 0, 0, 0, 0, 2, 0,  IWATCH ETC.
-60000.0, 33, 97, 240, 2, 5000, 0, 2,  NCASE ETC.
-10, 90, 0, 0, 0, ,  DIRECTIONAL BREM OPTIONS
+6000000.0, 33, 97, 240, 2, 5000, 0, 2,  NCASE ETC.
+8, 100, 0, 0, 0, ,  DIRECTIONAL BREM OPTIONS
 1000, 0, NSPLIT
--1, 10, 0.3, -1, 0, 0,  0.0, 0.0, 0.0, 0.0,  IQIN, ISOURCE + OPTIONS
+-1, 10, 0.36, -1, 0, 0,  0.0, 0.0, 0.0, 0.0,  IQIN, ISOURCE + OPTIONS
 0, MONOENERGETIC
 0.180
-0, 0, 0.512, 0.001, 0, 0, 0,  0 , ECUT,PCUT,IREJCT,ESAVE
+0, 0, 0.512, 0.001, 0, 0, ,  0 , ECUT,PCUT,IREJCT,ESAVE
 0, 0, 0, 0, 0,  PHOTON FORCING
 1, 2,  SCORING INPUT
-1, 0
-13, 
-1,  DOSE COMPONENTS
-2, 0
-0
-0
--0.5, Z TO FRONT FACE
+0,0
+0,  DOSE COMPONENTS
+0, Z TO FRONT FACE
 *********** start of CM XTUBE with identifier MXR600  ***********
 5.0, RMAX
 MXR-320
@@ -166,16 +162,16 @@ VACUUM
  :Start DBS rejection plane:
  
  Use a rejection plane= On
- Z(cm) from zero reference plane= 89
+ Z(cm) from zero reference plane= 98
  
  :Stop DBS rejection plane:
  #########################
  :Start BCSE:
  
- Use BCSE= Off
- Media to enhance=  
- Enhancement constant= 20
- Enhancement power= 1
+ Use BCSE= On
+ Media to enhance=  W
+ Enhancement constant= 200
+ Enhancement power= -1
  Russian Roulette= off
  
  :Stop BCSE:
