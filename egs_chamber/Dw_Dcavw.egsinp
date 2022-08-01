@@ -1,7 +1,6 @@
 ##################################
 #
-# simulate Dw and Dcav,w with chamber in water phantom
-# with XCSE and IPSS
+# simulate Dw and Dcav,w with chamber in water phantom with XCSE and IPSS
 #
 ##################################
 
@@ -552,8 +551,26 @@
         name             = WYQ180
         particle type    = all
     :stop source:
+
+    :start source:
+        library     = egs_beam_source
+        name        = last180
+        beam code   = BEAM_MXR-601HP 
+        pegs file   = pegsless
+        input file  = last180 
+        particle type = all
+    :stop source:
     
-    simulation source = WYQ180
+    :start source:
+        library = egs_transformed_source
+        name    = last180_
+        source name = last180
+        :start transformation:
+            translation = 0 0 -100
+        :stop transformation:
+    :stop source:
+
+    simulation source = last180_
 
 :stop source definition:
 
@@ -706,11 +723,12 @@
 # ausgab object definition 
 ##################################
 :start ausgab object definition: # Output options
-    :start ausgab object: # Track scoring (view in egs_view)
-        name    = my_tracks
-        library = egs_track_scoring
-        stop scoring = 1024
-    :stop ausgab object:
+#    :start ausgab object: # Track scoring (view in egs_view)
+#        name    = my_tracks
+#        library = egs_track_scoring
+#        stop scoring = 128
+#        buffer size = 128
+#    :stop ausgab object:
 
 :stop ausgab object definition:
 
@@ -775,7 +793,7 @@
 # run control 
 ##################################
 :start run control:
-    ncase                       = 1E8
+    ncase                       = 4E8
     #nbatch                      = [optional] number of batches to use (default is 10)
     #statistical accuracy sought = [optional] required uncertainty in %
     #max cpu hours allowed       = [optional] max. CPU time allowed
