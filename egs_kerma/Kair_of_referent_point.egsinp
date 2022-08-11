@@ -39,17 +39,27 @@
 
     :stop geometry:
 
-    ##################################
-    # Kair at the reference distance
-    ##################################
+    ####################
+    # at (0, 0, 0) of egs coordinate
+    # a thin disk of water with a radii of 0.4 
+    # cm and a thickness of  0.025 cm is used 
+    # to approximate a point.
+    ####################
     :start geometry:
-        library  = egs_spheres
-        name     = reference_point
-        midpoint = 0 0 2
-        radii    = 0.01
-        :start media input:
-            media = AIR
-        :stop media input:
+        library = egs_cones
+        type = EGS_ConeStack
+        name = reference_point
+        axis = 0 0 -0.0125 0 0 1
+
+        :start layer:
+            thickness = 0.025
+            top radii = 0.4 
+            bottom radii = 0.4
+            media = WATER
+        :stop layer:
+        
+        set label = reference_point_cavity_label 0
+
     :stop geometry:
 
 
