@@ -82,14 +82,40 @@
 # Source definition 
 ##################################
 :start source definition:
-    :start source:
-        library          = egs_phsp_source
-        phase space file = WYQ180.egsphsp1 
-        name             = WYQ180
-        particle type    = photons
-    :stop source:
+
+#   # phsp-source
+#   :start source:
+#       library          = egs_phsp_source
+#       phase space file = WYQ180.egsphsp1 
+#       name             = WYQ180
+#       particle type    = photons
+#   :stop source:
     
-    simulation source = WYQ180
+    # collimated_source
+    :start source:
+        library = egs_collimated_source
+        name    = last180_spec
+
+        :start source shape:
+            type = point
+            position = 0 0 -100
+        :stop source shape:
+
+        :start target shape:
+            library = egs_circle
+            radius = 5.25
+        :stop target shape:
+
+        distance = 100
+        charge = 0
+
+        :start spectrum:
+            type = tabulated spectrum
+            spectrum file = last180.spectrum
+        :stop spectrum:
+    :stop source:
+
+    simulation source = last180_spec
 
 :stop source definition:
 
