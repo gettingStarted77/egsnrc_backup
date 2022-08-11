@@ -18,12 +18,18 @@
     #
     ##################################
     :start geometry:
-        library  = egs_box
-        box size = 800
+        library  = egs_ndgeometry
+        type     = EGS_XYZGeometry
         name     = world
+        
+        x-planes = -16, 16
+        y-planes = -16, 16
+        z-planes = -101, 30
+
         :start media input:
-            media = AIR
+            media = VACUUM
         :stop media input:
+
     :stop geometry:
 
 
