@@ -14,15 +14,15 @@
 
     ##################################
     #
-    # world filled air (8 m x 8 m x 8 m) 
+    # world filled air (0.4 m x 0.4 m x 2.1 m) 
     #
     ##################################
     :start geometry:
         library  = egs_box
-        box size = 800
+        box size = 40 40 210
         name     = world
         :start media input:
-            media = AIR
+            media = VACUUM
         :stop media input:
     :stop geometry:
 
