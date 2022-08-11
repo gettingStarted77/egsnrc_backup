@@ -197,7 +197,7 @@
     :start calculation geometry:
         geometry name         = reference_point_in_world
         scoring regions       = 1  # outer air shell
-        scoring region masses = 5.04661E-9 # mass in g for each region
+        scoring region masses = 1.51398E-5  # mass in g for each region
     :stop calculation geometry:
 
     ### fluence scoring requested (common to all calculation geometries)
@@ -229,7 +229,7 @@
         medium dose = no
         region dose = yes
         dose regions = 1
-        volume = 4.18879E-6
+        volume = 1.51398E-5 
     :stop ausgab object:
    
 :stop ausgab object definition:
@@ -271,7 +271,7 @@
 ##################################
 :start rng definition:
     type = ranmar
-    initial seeds = 1802 1000
+    initial seeds = 22 33
 :stop rng definition:
 
 
