@@ -15,15 +15,29 @@
     ##################################
 ##### reference_point in world filled air (8 m x 8 m x 8 m) 
     ##################################
-    :start geometry:
-        library  = egs_box
-        box size = 800
-        name     = world
-        :start media input:
-            media = AIR
-        :stop media input:
-    :stop geometry:
+#   :start geometry:
+#       library  = egs_box
+#       box size = 800
+#       name     = world
+#       :start media input:
+#           media = AIR
+#       :stop media input:
+#   :stop geometry:
 
+    :start geometry:
+        library  = egs_ndgeometry
+        type     = EGS_XYZGeometry
+        name     = world
+        
+        x-planes = -16, 16
+        y-planes = -16, 16
+        z-planes = -101, 30
+
+        :start media input:
+            media = VACUUM
+        :stop media input:
+
+    :stop geometry:
 
     ##################################
     # Kair at the reference distance
