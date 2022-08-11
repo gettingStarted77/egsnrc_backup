@@ -41,14 +41,14 @@
     ##################################
 
     ####################
-    # The chamber at (0, 0, 3.953348427) of egs coordinate
+    # The chamber at (0, 0, 0) of egs coordinate
     # to simulate Dcav,air in air
     ####################
     :start geometry:
         library = egs_cones
         type = EGS_ConeStack
         name = chamber
-        axis = 0 -1.3 3.953348427 0 1 0
+        axis = 0 -1.3 0 0 1 0
         
         ####################
         # tip
