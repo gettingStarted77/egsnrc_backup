@@ -485,32 +485,59 @@
 # Source definition 
 ##################################
 :start source definition:
-    :start source:
-        library          = egs_phsp_source
-        phase space file = WYQ180.egsphsp1 
-        name             = WYQ180
-        particle type    = all
-    :stop source:
-
-    :start source:
-        library     = egs_beam_source
-        name        = last180
-        beam code   = BEAM_MXR-601HP 
-        pegs file   = pegsless
-        input file  = last180 
-        particle type = all
-    :stop source:
     
+#   # phsp_source
+#   :start source:
+#       library          = egs_phsp_source
+#       phase space file = WYQ180.egsphsp1 
+#       name             = WYQ180
+#       particle type    = all
+#   :stop source:
+
+#   # beam_source
+#   :start source:
+#       library     = egs_beam_source
+#       name        = last180
+#       beam code   = BEAM_MXR-601HP 
+#       pegs file   = pegsless
+#       input file  = last180 
+#       particle type = all
+#   :stop source:
+#   
+#   :start source:
+#       library = egs_transformed_source
+#       name    = last180_
+#       source name = last180
+#       :start transformation:
+#           translation = 0 0 -100
+#       :stop transformation:
+#   :stop source:
+
+    # collimated_source
     :start source:
-        library = egs_transformed_source
-        name    = last180_
-        source name = last180
-        :start transformation:
-            translation = 0 0 -100
-        :stop transformation:
+        library = egs_collimated_source
+        name    = last180_spec
+
+        :start source shape:
+            type = point
+            position = 0 0 -100
+        :stop source shape:
+
+        :start target shape:
+            library = egs_circle
+            radius = 5.25
+        :stop target shape:
+
+        distance = 100
+        charge = 0
+
+        :start spectrum:
+            type = tabulated spectrum
+            spectrum file = last180.spectrum
+        :stop spectrum:
     :stop source:
 
-    simulation source = last180_
+    simulation source = last180_spec
 
 :stop source definition:
 
@@ -663,12 +690,12 @@
 # ausgab object definition 
 ##################################
 :start ausgab object definition: # Output options
-#    :start ausgab object: # Track scoring (view in egs_view)
-#        name    = my_tracks
-#        library = egs_track_scoring
-#        stop scoring = 128
-#        buffer size = 128
-#    :stop ausgab object:
+    :start ausgab object: # Track scoring (view in egs_view)
+        name    = my_tracks
+        library = egs_track_scoring
+        stop scoring = 1024
+        buffer size = 1024
+    :stop ausgab object:
 
 :stop ausgab object definition:
 
