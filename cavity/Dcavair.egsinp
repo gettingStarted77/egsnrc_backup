@@ -191,7 +191,7 @@
         :stop spectrum:
     :stop source:
 
-    simulation source = last180.spec
+    simulation source = last180_spec
 
 :stop source definition:
 
@@ -347,7 +347,7 @@
 # run control 
 ##################################
 :start run control:
-    ncase                       = 1E9
+    ncase                       = 1E10
     #nbatch                      = [optional] number of batches to use (default is 10)
     #statistical accuracy sought = [optional] required uncertainty in %
     #max cpu hours allowed       = [optional] max. CPU time allowed
