@@ -41,7 +41,7 @@
 
     ####################
     # at (0, 0, 0) of egs coordinate
-    # a thin disk of water with a radii of 0.4 
+    # a thin disk of air with a radii of 0.4 
     # cm and a thickness of  0.025 cm is used 
     # to approximate a point.
     ####################
@@ -55,7 +55,7 @@
             thickness = 0.025
             top radii = 0.4 
             bottom radii = 0.4
-            media = WATER
+            media = AIR
         :stop layer:
         
         set label = reference_point_cavity_label 0
